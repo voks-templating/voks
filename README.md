@@ -1,10 +1,11 @@
 ![voks](./docs/voks-logo.svg)
 
-voks [ˈvokʃ] is a  minimal, yet powerful enough templating language based on Javascript Template Literals.
+voks [ˈvokʃ] is a minimal, yet powerful enough templating language based on
+Javascript Template Literals.
 
-Rendering speed is not the foremost goal of this library, as I see most performance
-problems not in the rendering layer of classical web application frameworks
-but in overly excessive use of javascript in the frontend.
+Rendering speed is not the foremost goal of this library, as I see most
+performance problems not in the rendering layer of classical web application
+frameworks but in overly excessive use of javascript in the frontend.
 
 ## API
 
@@ -16,6 +17,12 @@ but in overly excessive use of javascript in the frontend.
   for async content, which results in iterative "write when ready" rendering.
 
 ## Usage
+
+### [nodejs](https://nodejs.org/)
+
+t.b.d
+
+### [deno](https://deno.land)
 
 To have a better understanding of how things work, please give a look to the
 examples. But the code below shows the basic usage:
@@ -64,8 +71,8 @@ example will **not work** properly.
 const range = (min) => html`<input type="range" ${min !== undefined ? `min="${min}"` : ''}` ⚡️
 ```
 
-If you want to render dynamic properties as a template literal value you need to **use
-the `attr` function**.
+If you want to render dynamic properties as a template literal value you need to
+**use the `attr` function**.
 
 ```
 const range = (min) => html`<input type="range" ${min !== undefined ? attr('min', min) : ''}` ✅
