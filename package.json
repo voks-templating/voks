@@ -1,0 +1,26 @@
+{
+  "name": "voks",
+  "version": "0.0.1",
+  "description": "voks is a minimal yet powerful template engine based on js template literals and async generators",
+  "main": "dist/mod.js",
+  "types": "mod.ts",
+  "directories": {
+    "dist": "dist"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "*.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voks-templating/voks.git"
+  },
+  "author": "Falk Hoppe <falk@hey.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/voks-templating/voks/issues"
+  },
+  "homepage": "https://github.com/voks-templating/voks#readme"
+}

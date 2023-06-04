@@ -1,4 +1,4 @@
-import { assertEquals } from "./deps.ts";
+import { assertEquals } from "asserts";
 import { attr, html, mixUp, renderToString } from "./mod.ts";
 import { TemplateString } from "./template_string.ts";
 
