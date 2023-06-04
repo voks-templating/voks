@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "deps:load": "deno cache --reload --lock=deno.lock mod.ts",
+
+    "run:example:express": "deno run --unstable --allow-read --allow-env --allow-net --no-check ./examples/express/example.express.ts",
+    "run:example:synch": "deno run examples/example.synch.ts",
+    "run:example:stream": "deno run examples/example.stream.ts"
+  }
+}
