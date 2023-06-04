@@ -1,5 +1,9 @@
 ![voks](./docs/voks-logo.svg)
 
+[![deno.land/x version](https://shield.deno.dev/x/voks)](https://deno.land/x/voks)
+|
+[![npm version](https://img.shields.io/npm/v/voks)](https://www.npmjs.com/search?q=voks)
+
 voks [ˈvokʃ] is a minimal, yet powerful enough templating language based on
 Javascript Template Literals.
 
@@ -19,8 +23,6 @@ frameworks but in overly excessive use of javascript in the frontend.
 ## Usage
 
 ### [deno](https://deno.land)
-
-[![deno.land/x version](https://shield.deno.dev/x/voks)](https://deno.land/x/voks)
 
 Deno is written in deno so that it is a deno first class ~reptile~ citizen.
 
@@ -50,7 +52,6 @@ time. (See the express example for more details about that.)
 ### [nodejs](https://nodejs.org/)
 
 install voks as npm dependency:
-[![npm version](https://img.shields.io/npm/v/voks)](https://www.npmjs.com/search?q=voks)
 
 ```
 npm i --save voks
@@ -134,5 +135,3 @@ deno test
 ```
 deno bench
 ```
-
-x
