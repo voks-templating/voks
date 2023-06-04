@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/voks-templating/voks/issues"
   },
-  "homepage": "https://github.com/voks-templating/voks#readme"
+  "homepage": "https://github.com/voks-templating/voks#readme",
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "tagFormat": "${version}"
+  }
 }
