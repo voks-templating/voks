@@ -18,27 +18,11 @@ frameworks but in overly excessive use of javascript in the frontend.
 
 ## Usage
 
-### [nodejs](https://nodejs.org/)
-
-install voks as dependency:
-
-```
-npm i voks
-```
-
-Example Usage:
-
-```
-import { html, attr, renderToString } from 'voks'
-
-
-const template = html`<div ${[attr('class', 'fubar'), attr('checked', true)]} />`
-
-const res = await renderToString(template)
-console.log(res)
-```
-
 ### [deno](https://deno.land)
+
+[![deno.land/x version](https://shield.deno.dev/x/voks)](https://deno.land/x/voks)
+
+Deno is written in deno so that it is a deno first class ~reptile~ citizen.
 
 To have a better understanding of how things work, please give a look to the
 examples. But the code below shows the basic usage:
@@ -62,6 +46,27 @@ content, not yet available.
 This allows some fancy stuff like aborting such calls, when they take too long,
 and replace them by client side islands, that translude that content at client
 time. (See the express example for more details about that.)
+
+### [nodejs](https://nodejs.org/)
+
+install voks as npm dependency:
+[![npm version](https://img.shields.io/npm/v/voks)](https://www.npmjs.com/search?q=voks)
+
+```
+npm i --save voks
+```
+
+Example Usage:
+
+```
+import { html, attr, renderToString } from 'voks'
+
+
+const template = html`<div ${[attr('class', 'fubar'), attr('checked', true)]} />`
+
+const res = await renderToString(template)
+console.log(res)
+```
 
 ## Content Escaping
 
