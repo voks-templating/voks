@@ -173,6 +173,7 @@ Deno.test("render multiple attributes properly encoded", async () => {
 });
 
 Deno.test("mixing up to arrays, should result in an alternating array", () => {
+  // deno-lint-ignore no-explicit-any
   const a = ["a", "b", "c", "d"] as any;
   a.raw = ["a", "b", "c", "d"];
 
@@ -184,6 +185,7 @@ Deno.test("mixing up to arrays, should result in an alternating array", () => {
     6,
   );
 
+  // deno-lint-ignore no-explicit-any
   const resolved = mixed.map((el: TemplateString | any) =>
     el.isTemplateString ? el.content : el
   );
