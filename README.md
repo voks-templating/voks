@@ -20,7 +20,23 @@ frameworks but in overly excessive use of javascript in the frontend.
 
 ### [nodejs](https://nodejs.org/)
 
-t.b.d
+install voks as dependency:
+
+```
+npm i voks
+```
+
+Example Usage:
+
+```
+import { html, attr, renderToString } from 'voks'
+
+
+const template = html`<div ${[attr('class', 'fubar'), attr('checked', true)]} />`
+
+const res = await renderToString(template)
+console.log(res)
+```
 
 ### [deno](https://deno.land)
 
