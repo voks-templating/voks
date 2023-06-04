@@ -10,7 +10,7 @@ jobs:
       - uses: denoland/setup-deno@v1.1.1
         with:
           deno-version: v1.x # Run with latest stable Deno.
-      - run: deno fmt --check --ignore=dist,examples,release.config.js,*.md,*.json
+      - run: deno fmt --check --ignore=dist,examples,release.config.js,**/*.md,**/*.json
       - run: deno lint --ignore=dist,examples,release.config.js,*.md,*.json
       - run: deno test
       - name: Semantic Release
