@@ -15,6 +15,7 @@ jobs:
       - run: deno fmt --check *.ts
       - run: deno lint *.ts
       - run: deno test
+      - run: deno task build:esm
       - name: Semantic Release
         uses: mechanoid/semantic-release-action@main
         env:
