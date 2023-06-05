@@ -1,5 +1,5 @@
 {
-  "name": "voks",
+  "name": "@voks/voks",
   "version": "0.0.1",
   "description": "voks is a minimal yet powerful template engine based on js template literals and async generators",
   "main": "dist/mod.js",
