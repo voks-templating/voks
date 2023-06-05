@@ -9,7 +9,7 @@ await esbuild.build({
   format: "esm",
   // minify: true,
   sourcemap: true,
-  target: "es2019",
+  target: "node18.8",
 })
   .then((_res) => {
     console.log("build succeeded");
