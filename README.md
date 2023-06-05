@@ -65,7 +65,7 @@ nodjs18.8 (see [./scripts/build.node.ts](./scripts/build.node.ts)).
 
 Install voks as npm dependency:
 
-```bash
+```shell
 npm i --save @voks/voks
 ```
 
@@ -140,12 +140,12 @@ To enable settings for your app, provide them in the run environment or create a
 
 :)
 
-```bash
+```shell
 deno test
 ```
 
 ## Benchmarks
 
-```bash
+```shell
 deno bench
 ```
