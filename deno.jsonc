@@ -1,7 +1,7 @@
 {
   "tasks": {
     "deps:load": "deno cache --reload --lock=deno.lock mod.ts",
-    "build:esm": "deno run -A ./scripts/build.node.ts",
+    "build:node": "deno run -A ./scripts/build.node.ts",
     // "build:esm": "deno eval \"import 'esbuild';\" -- --bundle --format=esm --minify --sourcemap --outfile=dist/bundle.js mod.ts",
     "run:example:express": "deno run --unstable --allow-read --allow-env --allow-net --no-check ./examples/express/example.express.ts",
     "run:example:synch": "deno run examples/example.synch.ts",
