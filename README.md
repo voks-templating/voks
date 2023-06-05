@@ -4,8 +4,10 @@
 |
 [![npm version](https://img.shields.io/npm/v/voks)](https://www.npmjs.com/search?q=voks)
 
-voks [ˈvokʃ] is a minimal, yet powerful enough templating language based on
-Javascript Template Literals.
+voks [ˈvokʃ], danish for wax, is a minimal, yet powerful enough templating
+language based on Javascript Template Literals. It provides the ability to
+define and compose typescript checked components, while not losing the
+flexibility of html declarations.
 
 Rendering speed is not the foremost goal of this library, as I see most
 performance problems not in the rendering layer of classical web application
@@ -51,7 +53,10 @@ time. (See the express example for more details about that.)
 
 ### [nodejs](https://nodejs.org/)
 
-install voks as npm dependency:
+voks is beeing built for nodejs with esbuild with esm module format targeting
+nodjs18.8 (see [./scripts/build.node.ts](./scripts/build.node.ts)).
+
+Install voks as npm dependency:
 
 ```
 npm i --save voks
