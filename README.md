@@ -2,7 +2,7 @@
 
 [![deno.land/x version](https://shield.deno.dev/x/voks)](https://deno.land/x/voks)
 |
-[![npm version](https://img.shields.io/npm/v/voks)](https://www.npmjs.com/search?q=voks)
+[![npm version](https://img.shields.io/npm/v/voks)](https://www.npmjs.com/package/@voks/voks)
 
 voks [ˈvokʃ], danish for wax, is a minimal, yet powerful enough templating
 language based on Javascript Template Literals. It provides the ability to
@@ -63,7 +63,7 @@ nodjs18.8 (see [./scripts/build.node.ts](./scripts/build.node.ts)).
 Install voks as npm dependency:
 
 ```
-npm i --save voks
+npm i --save @voks/voks
 ```
 
 Example Usage:
