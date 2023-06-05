@@ -30,5 +30,6 @@
       "main"
     ],
     "tagFormat": "${version}"
-  }
+  },
+  "private": false
 }
