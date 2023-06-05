@@ -13,6 +13,10 @@ Rendering speed is not the foremost goal of this library, as I see most
 performance problems not in the rendering layer of classical web application
 frameworks but in overly excessive use of javascript in the frontend.
 
+## Release History
+
+[https://github.com/voks-templating/voks/releases](https://github.com/voks-templating/voks/releases)
+
 ## API
 
 - `html` - tagged template literal function to declare simple minimal components
