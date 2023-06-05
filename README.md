@@ -34,8 +34,12 @@ Deno is written in deno so that it is a deno first class ~reptile~ citizen.
 To have a better understanding of how things work, please give a look to the
 examples. But the code below shows the basic usage:
 
-```
-import { html, HTMLTemplate, renderToStream } from "https://deno.land/x/voks/mod.ts";
+```typescript
+import {
+  html,
+  HTMLTemplate,
+  renderToStream,
+} from "https://deno.land/x/voks/mod.ts";
 
 const viewComponent = (content: HTMLTemplate) =>
   html`<p>${"hello"}</p> <p>${asyncFunc("world!")}</p>`;
@@ -61,20 +65,22 @@ nodjs18.8 (see [./scripts/build.node.ts](./scripts/build.node.ts)).
 
 Install voks as npm dependency:
 
-```
+```bash
 npm i --save @voks/voks
 ```
 
 Example Usage:
 
-```
-import { html, attr, renderToString } from 'voks'
+```javascript
+import { attr, html, renderToString } from "voks";
 
+const template = html`<div ${[
+  attr("class", "fubar"),
+  attr("checked", true),
+]} />`;
 
-const template = html`<div ${[attr('class', 'fubar'), attr('checked', true)]} />`
-
-const res = await renderToString(template)
-console.log(res)
+const res = await renderToString(template);
+console.log(res);
 ```
 
 ## Content Escaping
@@ -85,7 +91,7 @@ content, when before passing it to yield.
 
 It can be considered as safe to pass `html` generators as keys.
 
-```
+```typescript
 renderToStream(html`<div>${"<script>console.log("hello, world!")</script>"}</div>`) # => "<div>&lt;script&gt;console.log(&quot;hello, world!&quot;)&lt;/script&gt;</div>"
 
 renderToStream(html`<div>${html`<script>console.log("hello, world!")</script>`}</div>`) # => "<div><script>console.log("hello, world!")</script></div>"
@@ -97,14 +103,14 @@ If you want to render attributes in a conditional or dynamic manner, you cannot
 rely on plain template literals as they would be escaped. So the following
 example will **not work** properly.
 
-```
+```typescript
 const range = (min) => html`<input type="range" ${min !== undefined ? `min="${min}"` : ''}` ⚡️
 ```
 
 If you want to render dynamic properties as a template literal value you need to
 **use the `attr` function**.
 
-```
+```typescript
 const range = (min) => html`<input type="range" ${min !== undefined ? attr('min', min) : ''}` ✅
 ```
 
@@ -134,12 +140,12 @@ To enable settings for your app, provide them in the run environment or create a
 
 :)
 
-```
+```bash
 deno test
 ```
 
 ## Benchmarks
 
-```
+```bash
 deno bench
 ```
