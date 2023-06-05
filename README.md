@@ -1,7 +1,6 @@
 ![voks](./docs/voks-logo.svg)
 
 [![deno.land/x version](https://shield.deno.dev/x/voks)](https://deno.land/x/voks)
-|
 [![npm version](https://img.shields.io/npm/v/@voks/voks)](https://www.npmjs.com/package/@voks/voks)
 
 voks [ˈvokʃ], danish for wax, is a minimal, yet powerful enough templating
