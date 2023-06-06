@@ -18,6 +18,8 @@ frameworks but in overly excessive use of javascript in the frontend.
 
 ## API
 
+For details see: https://deno.land/x/voks/mod.ts
+
 - `html` - tagged template literal function to declare simple minimal components
 - `attr` - function to declare dynamic html attributes with escaped values
 - `renderToString` - renders given html template components to a string. The
