@@ -257,6 +257,6 @@ Deno.test("minification test", async () => {
 
   assertEquals(
     result,
-    '<input type="text" data-fubar="some-data" />',
+    "<html><head><title>test</title></head></html>",
   );
 });
