@@ -140,8 +140,7 @@ function minify(text: string) {
     .replace(/\s+/g, " ")
     .replace(/\s>/g, ">")
     .replace(/>\s*</g, "><")
-    .replace(/>\s*/g, ">")
-    .replace(/\s*</g, "<");
+    .replace(/>\s*/g, ">");
 }
 
 export {
