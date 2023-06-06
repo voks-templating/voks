@@ -244,3 +244,19 @@ Deno.test("camelCased attribute names should be rendered in kebap-case", async (
     '<input type="text" data-fubar="some-data" />',
   );
 });
+
+Deno.test("minification test", async () => {
+  const template = html`<html ${null}>
+    <head>
+      <title> test</title>
+
+    </head>
+  </html>`;
+
+  const result = await renderToString(template, { minify: true });
+
+  assertEquals(
+    result,
+    '<input type="text" data-fubar="some-data" />',
+  );
+});
