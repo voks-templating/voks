@@ -7,3 +7,15 @@ export const escapeHTML = (htmlText = ""): string => {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 };
+
+// inverse function of escapeHTML, not touching any other HTML characters.
+// Mainly provided for testing purposes.
+export const unescapeHTML = (escapedHTMLText = ""): string => {
+  return escapedHTMLText.toString()
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&") // has to be last, because of ampersands in the replacements
+  ;
+};

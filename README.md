@@ -99,6 +99,9 @@ renderToStream(html`<div>${"<script>console.log("hello, world!")</script>"}</div
 renderToStream(html`<div>${html`<script>console.log("hello, world!")</script>`}</div>`) # => "<div><script>console.log("hello, world!")</script></div>"
 ```
 
+In the process of the escaping, `&`, `"`, `'`, `<`, and `>` are replaced by
+their HTML entity equivalents (`&amp;`,`&quot;`,`&#39;`,`&lt;`,`&gt;`).
+
 ### Attributes and Escaping
 
 If you want to render attributes in a conditional or dynamic manner, you cannot
@@ -118,6 +121,38 @@ to **use the `attr` function**.
 ```typescript
 const range = (min) => html`<input type="range" ${attr('min', min)}` ✅
 ```
+
+### Attributes and Attribute Value Types
+
+#### String Attributes
+
+`value` will be HTML escaped, so you can safely pass user input to it. (see
+[Content Escaping](#content-escaping).
+
+The handling as string (inclusively the escaping) is the default behaviour, so
+`numbers`, symbols and everything not described here will be escaped.
+
+```
+attr('name', 'value')
+// => name="value"
+```
+
+#### Boolean
+
+`value` will not be rendered. Boolean attributes will be handled as standalone
+flag attributes.
+
+```
+attr('checked', true)
+// => checked
+```
+
+#### Object Literals and Arrays
+
+Object-Literals and Arrays will be stringified with `JSON.stringify` and HTML
+escaped. So parsing those values requires to unescape the HTML escaping and
+afterwards to pass it to `JSON.parse`. (see
+[Content Escaping](#content-escaping).
 
 ### Object Literal Attributes
 

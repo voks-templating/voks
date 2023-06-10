@@ -275,6 +275,9 @@ Deno.test("object literal attributes", async (t) => {
       class: "hello",
       dataFubar: "fubar",
       "data-fabula": true,
+      falsy: false,
+      nully: null,
+      undef: undefined,
     }}></div>`;
 
     const result = await renderToString(template, { minify: true });

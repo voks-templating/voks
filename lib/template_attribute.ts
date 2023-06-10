@@ -1,6 +1,13 @@
 import { escapeHTML } from "./escape_html.ts";
 
-export type AttributeValue = string | number | boolean | null | undefined;
+export type AttributeValue =
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | Record<string | number | symbol, unknown>
+  | unknown[];
 
 export class TemplateAttribute {
   key: string;
@@ -15,9 +22,19 @@ export class TemplateAttribute {
     return typeof this.value === "boolean";
   }
 
+  get isObjectLiteral() {
+    return this.value && Object.getPrototypeOf(this.value) === Object.prototype;
+  }
+
+  get isArray() {
+    return Array.isArray(this.value);
+  }
+
   toString() {
     if (this.isBoolean) {
       return this.value ? `${this.key} ` : "";
+    } else if (this.isObjectLiteral || this.isArray) {
+      return `${this.key}="${escapeHTML(JSON.stringify(this.value))}" `;
     }
 
     return this.value !== undefined && this.value !== null
