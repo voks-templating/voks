@@ -260,3 +260,28 @@ Deno.test("minification test", async () => {
     "<html><head><title>test</title></head></html>",
   );
 });
+
+Deno.test("object literal attributes", async (t) => {
+  await t.step("single data attribute", async () => {
+    const template = html`<div ${{ dataFubar: "fubar" }}></div>`;
+
+    const result = await renderToString(template, { minify: true });
+
+    assertEquals(result, '<div data-fubar="fubar"></div>');
+  });
+
+  await t.step("multiple attributes", async () => {
+    const template = html`<div ${{
+      class: "hello",
+      dataFubar: "fubar",
+      "data-fabula": true,
+    }}></div>`;
+
+    const result = await renderToString(template, { minify: true });
+
+    assertEquals(
+      result,
+      '<div class="hello" data-fubar="fubar" data-fabula></div>',
+    );
+  });
+});

@@ -109,11 +109,27 @@ example will **not work** properly.
 const range = (min) => html`<input type="range" ${min !== undefined ? `min="${min}"` : ''}` ⚡️
 ```
 
-If you want to render dynamic properties as a template literal value you need to
-**use the `attr` function**.
+There is an specific TemplateAttribute type that can be created using the
+`attr()` function.
+
+So if you want to render dynamic properties as a template literal value you need
+to **use the `attr` function**.
 
 ```typescript
-const range = (min) => html`<input type="range" ${min !== undefined ? attr('min', min) : ''}` ✅
+const range = (min) => html`<input type="range" ${attr('min', min)}` ✅
+```
+
+### Object Literal Attributes
+
+If you want to render attributes from an object literal, you can just pass it to
+the string literal, and it will be automatically converted to a list of Template
+Attributes.
+
+```typescript
+const min = 7;
+const range = (min) =>
+  html`<input type="range" ${{ min, checked: true, dataMessage: "hello" }}`;
+// => <input type="range" min="7" checked data-message="hello">
 ```
 
 ## Contribution

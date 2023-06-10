@@ -41,6 +41,12 @@ async function* resolver(
         "function"
     ) { // key is itself an iterator
       yield* (part as HTMLTemplateGenerator);
+    } else if (Object.getPrototypeOf(part) === Object.prototype) {
+      const attributes = Object.entries(
+        part as Record<string, AttributeValue>,
+      )
+        .map(([k, v]) => new TemplateAttribute(k, v));
+      yield* resolver(attributes);
     } else {
       // part is now a key provided to a template, that should be something like a string
       // Itself might be a new `html` generator, so that we pass yield then to it.
