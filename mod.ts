@@ -1,9 +1,9 @@
 import { escapeHTML } from "./lib/escape_html.ts";
-import { TemplateString } from "./template_string.ts";
+import { TemplateString } from "./lib/template_string.ts";
 import {
   type AttributeValue,
   TemplateAttribute,
-} from "./template_attribute.ts";
+} from "./lib/template_attribute.ts";
 
 type TemplateStringKeyList = unknown[];
 
@@ -146,6 +146,6 @@ function minify(text: string) {
 export {
   type AttributeValue,
   TemplateAttribute,
-} from "./template_attribute.ts";
+} from "./lib/template_attribute.ts";
 
-export { TemplateString } from "./template_string.ts";
+export { TemplateString } from "./lib/template_string.ts";

@@ -1,4 +1,4 @@
-import { escapeHTML } from "./lib/escape_html.ts";
+import { escapeHTML } from "./escape_html.ts";
 
 export type AttributeValue = string | number | boolean | null | undefined;
 

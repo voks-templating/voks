@@ -1,6 +1,6 @@
 import { assertEquals } from "asserts";
 import { attr, html, mixUp, renderToString } from "./mod.ts";
-import { TemplateString } from "./template_string.ts";
+import { TemplateString } from "./lib/template_string.ts";
 
 const sayHelloSync = (text: string): string => text;
 const sayHelloAsync = (text: string): Promise<string> =>
