@@ -1,4 +1,4 @@
-import { escapeHtml } from "./deps.ts";
+import { escapeHTML } from "./lib/escape_html.ts";
 
 export type AttributeValue = string | number | boolean | null | undefined;
 
@@ -21,7 +21,7 @@ export class TemplateAttribute {
     }
 
     return this.value !== undefined && this.value !== null
-      ? `${this.key}="${escapeHtml(this.value as string)}" `
+      ? `${this.key}="${escapeHTML(this.value as string)}" `
       : "";
   }
 }
