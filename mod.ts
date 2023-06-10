@@ -4,6 +4,7 @@ import {
   type AttributeValue,
   TemplateAttribute,
 } from "./lib/template_attribute.ts";
+import { RawContent } from "./lib/raw_content.ts";
 
 type TemplateStringKeyList = unknown[];
 
@@ -26,7 +27,9 @@ async function* resolver(
 ): HTMLTemplateGenerator {
   let i = 0;
   for (const part of parts) {
-    if ((part as TemplateString).isTemplateString) { // just return the static string parts of template literals
+    if (typeof part === "number") {
+      yield (part).toString();
+    } else if ((part as TemplateString).isTemplateString) { // just return the static string parts of template literals
       yield part;
     } else if (Array.isArray(part)) { // key is a list of more sub templates, that have to be rendered sequentially
       yield* resolver(part);
@@ -59,7 +62,7 @@ async function* resolver(
       } else {
         // anything else should be treated as a string and therefore be escaped for control signs
         // yield escapeHtml(resolved as string);
-        yield escapeHTML((resolved?.toString()) || "" as string);
+        yield escapeHTML(resolved || "" as string);
       }
     }
     i++;
@@ -95,6 +98,13 @@ export const html = (
 // Usage: html`<some-snippet ${attr("foo", "bar")} />`
 export const attr = (key: string, value: AttributeValue): TemplateAttribute =>
   new TemplateAttribute(key, value);
+
+// Attribute function for dynamically added attributes,
+// that can be rendered conditionally, depending on the attribute value.
+//
+// Usage: html`<some-snippet ${attr("foo", raw("bar"))} />`
+// Usage: html`<some-snippet ${raw('<script>alert('hello')</script>')} />`
+export const raw = (content: unknown): RawContent => new RawContent(content);
 
 // renderer to a fixed output string, resolving all async values provided to the template keys
 export const renderToString = async (

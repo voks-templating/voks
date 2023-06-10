@@ -85,44 +85,9 @@ const res = await renderToString(template);
 console.log(res);
 ```
 
-## Content Escaping
+## Attributes
 
-All keys passed to the `html` tagged template function are escaped when they are
-not itself generators. If you pass a generator function itself it has to escape
-content, when before passing it to yield.
-
-It can be considered as safe to pass `html` generators as keys.
-
-```typescript
-renderToStream(html`<div>${"<script>console.log("hello, world!")</script>"}</div>`) # => "<div>&lt;script&gt;console.log(&quot;hello, world!&quot;)&lt;/script&gt;</div>"
-
-renderToStream(html`<div>${html`<script>console.log("hello, world!")</script>`}</div>`) # => "<div><script>console.log("hello, world!")</script></div>"
-```
-
-In the process of the escaping, `&`, `"`, `'`, `<`, and `>` are replaced by
-their HTML entity equivalents (`&amp;`,`&quot;`,`&#39;`,`&lt;`,`&gt;`).
-
-### Attributes and Escaping
-
-If you want to render attributes in a conditional or dynamic manner, you cannot
-rely on plain template literals as they would be escaped. So the following
-example will **not work** properly.
-
-```typescript
-const range = (min) => html`<input type="range" ${min !== undefined ? `min="${min}"` : ''}` ⚡️
-```
-
-There is an specific TemplateAttribute type that can be created using the
-`attr()` function.
-
-So if you want to render dynamic properties as a template literal value you need
-to **use the `attr` function**.
-
-```typescript
-const range = (min) => html`<input type="range" ${attr('min', min)}` ✅
-```
-
-### Attributes and Attribute Value Types
+### Attribute Value Types
 
 #### String Attributes
 
@@ -165,6 +130,61 @@ const min = 7;
 const range = (min) =>
   html`<input type="range" ${{ min, checked: true, dataMessage: "hello" }}`;
 // => <input type="range" min="7" checked data-message="hello">
+```
+
+## Content Escaping
+
+All keys passed to the `html` tagged template function are escaped when they are
+not itself generators. If you pass a generator function itself it has to escape
+content, when before passing it to yield.
+
+It can be considered as safe to pass `html` generators as keys.
+
+```typescript
+renderToStream(html`<div>${"<script>console.log("hello, world!")</script>"}</div>`) # => "<div>&lt;script&gt;console.log(&quot;hello, world!&quot;)&lt;/script&gt;</div>"
+
+renderToStream(html`<div>${html`<script>console.log("hello, world!")</script>`}</div>`) # => "<div><script>console.log("hello, world!")</script></div>"
+```
+
+In the process of the escaping, `&`, `"`, `'`, `<`, and `>` are replaced by
+their HTML entity equivalents (`&amp;`,`&quot;`,`&#39;`,`&lt;`,`&gt;`).
+
+### Attributes and Escaping
+
+If you want to render attributes in a conditional or dynamic manner, you cannot
+rely on plain template literals as they would be escaped. So the following
+example will **not work** properly.
+
+```typescript
+const range = (min) => html`<input type="range" ${min !== undefined ? `min="${min}"` : ''}` ⚡️
+```
+
+There is an specific TemplateAttribute type that can be created using the
+`attr()` function.
+
+So if you want to render dynamic properties as a template literal value you need
+to **use the `attr` function**.
+
+```typescript
+const range = (min) => html`<input type="range" ${attr('min', min)}` ✅
+```
+
+### Raw Content
+
+If you want to render raw content, you can use the `raw` function. It will
+bypass the html escaping and allow you to pass raw content to the template.
+
+NOTE! Please have in mind that this is a potential a very high security risk, as
+it allows to inject arbitrary content into the template. So please use it with
+care. As a rule of thumb, only use it for content that is not user generated
+(e.g. loaded from db content, that has been entered by users in first place)
+
+```typescript
+// raw content
+html`<div ${raw(content)}></div>`;
+
+// raw attribute values
+html`<input type="text" ${attr("value", raw(value))} />`;
 ```
 
 ## Contribution

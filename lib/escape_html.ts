@@ -1,6 +1,14 @@
+import { RawContent } from "./raw_content.ts";
+
 // benched the replace(//) method against replaceAll (it was faster for a simple string in about 60ns)
-export const escapeHTML = (htmlText = ""): string => {
-  return htmlText.toString()
+export const escapeHTML = (
+  htmlText: string | unknown = "",
+): string | unknown => {
+  if (htmlText instanceof RawContent) {
+    return (htmlText as RawContent).content?.toString();
+  }
+
+  return (htmlText as string).toString()
     .replace(/&/g, "&amp;") // has to be first, because of ampersands in the replacements
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;")

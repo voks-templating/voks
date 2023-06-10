@@ -1,5 +1,5 @@
 import { assertEquals } from "asserts";
-import { attr, html, mixUp, renderToString } from "./mod.ts";
+import { attr, html, mixUp, raw, renderToString } from "./mod.ts";
 import { TemplateString } from "./lib/template_string.ts";
 
 const sayHelloSync = (text: string): string => text;
@@ -285,6 +285,34 @@ Deno.test("object literal attributes", async (t) => {
     assertEquals(
       result,
       '<div class="hello" data-fubar="fubar" data-fabula></div>',
+    );
+  });
+});
+
+Deno.test("raw content", async (t) => {
+  await t.step("raw template content part", async () => {
+    const template = html`<div ${
+      raw('><script>alert("hello")</script><div')
+    }></div>`;
+
+    const result = await renderToString(template, { minify: true });
+
+    assertEquals(
+      result,
+      '<div><script>alert("hello")</script><div></div>',
+    );
+  });
+
+  await t.step("raw attribute value", async () => {
+    const template = html`<div ${{
+      dataFubar: raw('<script>alert("hello")</script>'),
+    }}></div>`;
+
+    const result = await renderToString(template, { minify: true });
+
+    assertEquals(
+      result,
+      '<div data-fubar="<script>alert("hello")</script>"></div>',
     );
   });
 });
