@@ -1,7 +1,7 @@
 import { assertEquals } from "asserts";
 import { TemplateAttribute } from "./template_attribute.ts";
 
-Deno.test("escapeHTML", async (t) => {
+Deno.test("template attribute", async (t) => {
   await t.step("boolean attribute", () => {
     const attribute = new TemplateAttribute("data-fubar", true);
     assertEquals(attribute.isBoolean, true);
