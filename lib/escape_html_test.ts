@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "asserts";
+import { assertEquals } from "asserts";
 import { escapeHTML } from "./escape_html.ts";
 
 Deno.test("escapeHTML", () => {
