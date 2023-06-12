@@ -31,7 +31,7 @@ For details see: https://deno.land/x/voks/mod.ts
 
 ### [deno](https://deno.land)
 
-Deno is written in deno so that it is a deno first class ~reptile~ citizen.
+Deno is written in deno so that it is a deno first class ~~reptile~~ citizen.
 
 To have a better understanding of how things work, please give a look to the
 examples. But the code below shows the basic usage:
@@ -222,3 +222,7 @@ deno test
 ```shell
 deno bench
 ```
+
+## License
+
+[Apache-2.0](./LICENSE)
