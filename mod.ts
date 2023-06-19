@@ -109,7 +109,6 @@ export const raw = (content: unknown): RawContent => new RawContent(content);
 // renderer to a fixed output string, resolving all async values provided to the template keys
 export const renderToString = async (
   template: HTMLTemplate,
-  options: { minify?: boolean } = {},
 ): Promise<string> => {
   const result = [];
 
@@ -123,21 +122,19 @@ export const renderToString = async (
     }
   }
 
-  return options.minify ? minify(result.join("")) : result.join("");
+  return result.join("");
 };
 
 export const renderToStream = async (
   stream: ResponseStream,
   template: HTMLTemplate,
-  options: { minify?: boolean } = {},
 ) => {
   const encoder = new TextEncoder();
   while (true) {
     try {
       const part = await (await template).next();
-      const value = options.minify ? minify(part.value) : part.value;
 
-      stream.write(encoder.encode(value));
+      stream.write(encoder.encode(part.value));
 
       if (part.done) {
         stream?.close && stream.close();
@@ -149,15 +146,6 @@ export const renderToStream = async (
     }
   }
 };
-
-function minify(text: string) {
-  return text?.toString()
-    .replace(/\t/g, "")
-    .replace(/\s+/g, " ")
-    .replace(/\s>/g, ">")
-    .replace(/>\s*</g, "><")
-    .replace(/>\s*/g, ">");
-}
 
 export {
   type AttributeValue,

@@ -1,5 +1,6 @@
 import { assertEquals } from "asserts";
 import { attr, html, mixUp, raw, renderToString } from "./mod.ts";
+import { minify } from "./lib/minify.ts";
 import { TemplateString } from "./lib/template_string.ts";
 
 const sayHelloSync = (text: string): string => text;
@@ -147,7 +148,7 @@ Deno.test("escape attributes properly with conditional props", async () => {
     ${attr("nullish-attribute", null)}
   />`;
 
-  const result = await renderToString(template, { minify: true });
+  const result = minify(await renderToString(template));
 
   assertEquals(
     result,
@@ -208,7 +209,7 @@ Deno.test("minifying", async (t) => {
       ${attr("data-test", 5)}
     />`;
 
-    const result = await renderToString(template, { minify: true });
+    const result = minify(await renderToString(template));
 
     assertEquals(
       result,
@@ -221,7 +222,7 @@ Deno.test("minifying", async (t) => {
     async () => {
       const template = html`<button ${null}>label</button>`;
 
-      const result = await renderToString(template, { minify: true });
+      const result = minify(await renderToString(template));
 
       assertEquals(
         result,
@@ -237,7 +238,7 @@ Deno.test("camelCased attribute names should be rendered in kebap-case", async (
     attr("dataFubar", dataAttribute)
   } />`;
 
-  const result = await renderToString(template, { minify: true });
+  const result = minify(await renderToString(template));
 
   assertEquals(
     result,
@@ -253,7 +254,7 @@ Deno.test("minification test", async () => {
     </head>
   </html>`;
 
-  const result = await renderToString(template, { minify: true });
+  const result = minify(await renderToString(template));
 
   assertEquals(
     result,
@@ -265,7 +266,7 @@ Deno.test("object literal attributes", async (t) => {
   await t.step("single data attribute", async () => {
     const template = html`<div ${{ dataFubar: "fubar" }}></div>`;
 
-    const result = await renderToString(template, { minify: true });
+    const result = minify(await renderToString(template));
 
     assertEquals(result, '<div data-fubar="fubar"></div>');
   });
@@ -280,7 +281,7 @@ Deno.test("object literal attributes", async (t) => {
       undef: undefined,
     }}></div>`;
 
-    const result = await renderToString(template, { minify: true });
+    const result = minify(await renderToString(template));
 
     assertEquals(
       result,
@@ -295,7 +296,7 @@ Deno.test("raw content", async (t) => {
       raw('><script>alert("hello")</script><div')
     }></div>`;
 
-    const result = await renderToString(template, { minify: true });
+    const result = minify(await renderToString(template));
 
     assertEquals(
       result,
@@ -308,7 +309,7 @@ Deno.test("raw content", async (t) => {
       dataFubar: raw('<script>alert("hello")</script>'),
     }}></div>`;
 
-    const result = await renderToString(template, { minify: true });
+    const result = minify(await renderToString(template));
 
     assertEquals(
       result,
