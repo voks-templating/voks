@@ -15,7 +15,9 @@ export type HTMLTemplate =
 
 export interface ResponseStream {
   write(chunk: Uint8Array | string): unknown;
+  // deno-lint-ignore no-explicit-any
   close?(...args: any): void;
+  // deno-lint-ignore no-explicit-any
   end?(...args: any): void;
 }
 
