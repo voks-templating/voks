@@ -15,7 +15,8 @@ export type HTMLTemplate =
 
 export interface ResponseStream {
   write(chunk: Uint8Array | string): unknown;
-  close?(): void;
+  close?(...args: any): void;
+  end?(...args: any): void;
 }
 
 const isAsyncIterator = (thing: unknown) =>
@@ -27,7 +28,9 @@ async function* resolver(
 ): HTMLTemplateGenerator {
   let i = 0;
   for (const part of parts) {
-    if (typeof part === "number") {
+    if (part === undefined || part === null || part === false) {
+      yield "";
+    } else if (typeof part === "number") {
       yield (part).toString();
     } else if ((part as TemplateString).isTemplateString) { // just return the static string parts of template literals
       yield part;
@@ -125,11 +128,17 @@ export const renderToString = async (
   return result.join("");
 };
 
+export type StreamRenderingOptions = {
+  closeStream?: boolean;
+};
+
 export const renderToStream = async (
   stream: ResponseStream,
   template: HTMLTemplate,
+  { closeStream }: StreamRenderingOptions = { closeStream: false },
 ) => {
   const encoder = new TextEncoder();
+
   while (true) {
     try {
       const part = await (await template).next();
@@ -137,11 +146,15 @@ export const renderToStream = async (
       stream.write(encoder.encode(part.value));
 
       if (part.done) {
-        stream?.close && stream.close();
+        if (closeStream) {
+          stream.close?.();
+          stream.end?.();
+        }
         break;
       }
     } catch (e) {
-      console.log("could not finish stream", e.message);
+      const error = new Error("Failed to stream the response!", { cause: e });
+      console.log(error);
       break;
     }
   }

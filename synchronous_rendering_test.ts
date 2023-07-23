@@ -62,6 +62,18 @@ Deno.test("render snippet with html tag collection key property", async () => {
   assertEquals(result, "<div><p>hello,</p><p>world!</p></div>");
 });
 
+Deno.test("render snippet with  collection containing nullish, falsish or undefined values", async () => {
+  const subTemplates = [
+    null,
+    false,
+    undefined,
+  ];
+  const template = html`<div>${subTemplates}</div>`;
+  const result = await renderToString(template);
+
+  assertEquals(result, "<div></div>");
+});
+
 Deno.test("render snippet with async key property", async () => {
   const template = html`<div>${sayHelloAsync("wait for it! Hello,")} ${
     sayHelloSync("you sync world!")
