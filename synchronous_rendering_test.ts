@@ -329,3 +329,13 @@ Deno.test("raw content", async (t) => {
     );
   });
 });
+
+Deno.test("voks allow collections as root rendering element", async () => {
+  const result = await renderToString([
+    html`<p>hello</p>`,
+    html` `,
+    html`<p>world!</p>`,
+  ]);
+
+  assertEquals(result, "<p>hello</p> <p>world!</p>");
+});

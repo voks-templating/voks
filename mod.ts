@@ -113,9 +113,12 @@ export const raw = (content: unknown): RawContent => new RawContent(content);
 
 // renderer to a fixed output string, resolving all async values provided to the template keys
 export const renderToString = async (
-  template: HTMLTemplate,
+  templateOrList: HTMLTemplate | HTMLTemplate[],
 ): Promise<string> => {
   const result = [];
+  const template = Array.isArray(templateOrList)
+    ? html`${templateOrList}`
+    : templateOrList;
 
   while (true) {
     const part = await (await template).next();
@@ -136,10 +139,13 @@ export type StreamRenderingOptions = {
 
 export const renderToStream = async (
   stream: ResponseStream,
-  template: HTMLTemplate,
+  templateOrList: HTMLTemplate,
   { closeStream }: StreamRenderingOptions = { closeStream: false },
 ) => {
   const encoder = new TextEncoder();
+  const template = Array.isArray(templateOrList)
+    ? html`${templateOrList}`
+    : templateOrList;
 
   while (true) {
     try {
