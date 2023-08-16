@@ -340,7 +340,16 @@ Deno.test("voks allow collections of all renderable elements, passed as root ele
     true,
     7,
     html`<p>world!</p>`,
+    [
+      html`<p>hello</p>`,
+      [
+        html`<p>world</p>`,
+      ],
+    ],
   ]);
 
-  assertEquals(result, "<p>hello</p> true7<p>world!</p>");
+  assertEquals(
+    result,
+    "<p>hello</p> true7<p>world!</p><p>hello</p><p>world</p>",
+  );
 });
