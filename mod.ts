@@ -17,8 +17,8 @@ type TemplatePart =
   | undefined
   | null
   | HTMLTemplateGenerator
-  | Promise<HTMLTemplateGenerator>
-  | TemplatePart[];
+  | TemplatePart[]
+  | Promise<TemplatePart>;
 
 export type HTMLTemplate = TemplatePart | TemplatePart[];
 
