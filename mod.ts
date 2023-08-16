@@ -9,9 +9,17 @@ import { RawContent } from "./lib/raw_content.ts";
 type TemplateStringKeyList = unknown[];
 
 export type HTMLTemplateGenerator = AsyncGenerator;
-export type HTMLTemplate =
+
+type TemplatePart =
+  | string
+  | boolean
+  | number
+  | undefined
+  | null
   | HTMLTemplateGenerator
   | Promise<HTMLTemplateGenerator>;
+
+export type HTMLTemplate = TemplatePart | TemplatePart[];
 
 export interface ResponseStream {
   write(chunk: Uint8Array | string): unknown;
@@ -113,15 +121,13 @@ export const raw = (content: unknown): RawContent => new RawContent(content);
 
 // renderer to a fixed output string, resolving all async values provided to the template keys
 export const renderToString = async (
-  templateOrList: HTMLTemplate | HTMLTemplate[],
+  templateOrTemplatable: HTMLTemplate,
 ): Promise<string> => {
   const result = [];
-  const template = Array.isArray(templateOrList)
-    ? html`${templateOrList}`
-    : templateOrList;
+  const template = html`${templateOrTemplatable}`;
 
   while (true) {
-    const part = await (await template).next();
+    const part = await template.next();
 
     result.push(part.value);
 
@@ -139,17 +145,15 @@ export type StreamRenderingOptions = {
 
 export const renderToStream = async (
   stream: ResponseStream,
-  templateOrList: HTMLTemplate,
+  templateOrTemplatable: HTMLTemplate,
   { closeStream }: StreamRenderingOptions = { closeStream: false },
 ) => {
   const encoder = new TextEncoder();
-  const template = Array.isArray(templateOrList)
-    ? html`${templateOrList}`
-    : templateOrList;
+  const template = html`${templateOrTemplatable}`;
 
   while (true) {
     try {
-      const part = await (await template).next();
+      const part = await template.next();
 
       stream.write(encoder.encode(part.value));
 
