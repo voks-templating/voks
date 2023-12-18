@@ -9,8 +9,8 @@
     "run:example:stream": "deno run examples/example.stream.ts"
   },
   "imports": {
-    "asserts": "https://deno.land/std@0.190.0/testing/asserts.ts",
-    "esbuild": "https://deno.land/x/esbuild@v0.17.19/mod.js",
-    "esbuild_deno_loader": "https://deno.land/x/esbuild_deno_loader@0.8.0/mod.ts"
+    "asserts": "https://deno.land/std@0.209.0/testing/asserts.ts",
+    "esbuild": "https://deno.land/x/esbuild@v0.19.9/mod.js",
+    "esbuild_deno_loader": "https://deno.land/x/esbuild_deno_loader@0.8.2/mod.ts"
   }
 }
