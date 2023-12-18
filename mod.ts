@@ -42,7 +42,7 @@ async function* resolver(
     if (part === undefined || part === null || part === false) {
       yield "";
     } else if (typeof part === "number") {
-      yield (part).toString();
+      yield part.toString();
     } else if ((part as TemplateString).isTemplateString) { // just return the static string parts of template literals
       yield part;
     } else if (Array.isArray(part)) { // key is a list of more sub templates, that have to be rendered sequentially
