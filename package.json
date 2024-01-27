@@ -20,7 +20,7 @@
     "url": "git@github.com:voks-templating/voks.git"
   },
   "author": "Falk Hoppe <falk@hey.com>",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/voks-templating/voks/issues"
   },
