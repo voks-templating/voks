@@ -2,15 +2,15 @@
   "tasks": {
     "deps:load": "deno cache --reload --lock=deno.lock mod.ts",
     "build:node": "deno run -A ./scripts/build.node.ts",
-    "check": "deno lint && deno fmt --check *.ts lib/*.ts",
+    "check": "deno lint *.ts lib/*.ts && deno fmt --check *.ts lib/*.ts",
     // "build:esm": "deno eval \"import 'esbuild';\" -- --bundle --format=esm --minify --sourcemap --outfile=dist/bundle.js mod.ts",
     "run:example:express": "deno run --unstable --allow-read --allow-env --allow-net --no-check ./examples/express/example.express.ts",
     "run:example:synch": "deno run examples/example.synch.ts",
     "run:example:stream": "deno run examples/example.stream.ts"
   },
   "imports": {
-    "asserts": "https://deno.land/std@0.209.0/testing/asserts.ts",
-    "esbuild": "https://deno.land/x/esbuild@v0.19.9/mod.js",
-    "esbuild_deno_loader": "https://deno.land/x/esbuild_deno_loader@0.8.2/mod.ts"
+    "asserts": "https://deno.land/std@0.213.0/assert/mod.ts",
+    "esbuild": "https://deno.land/x/esbuild@v0.19.12/mod.js",
+    "esbuild_deno_loader": "https://deno.land/x/esbuild_deno_loader@0.8.5/mod.ts"
   }
 }
