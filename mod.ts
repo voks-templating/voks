@@ -179,3 +179,5 @@ export {
 } from "./lib/template_attribute.ts";
 
 export { TemplateString } from "./lib/template_string.ts";
+
+export { RawContent };
